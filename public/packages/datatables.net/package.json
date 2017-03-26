@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "datatables.net",
+        "scope": null,
+        "escapedName": "datatables.net",
+        "name": "datatables.net",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/opt/lampp/htdocs/keepWhite"
+    ]
+  ],
+  "_from": "datatables.net@latest",
+  "_id": "datatables.net@2.1.1",
+  "_inCache": true,
+  "_location": "/datatables.net",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/datatables.net-2.1.1.tgz_1484741761360_0.07960011018440127"
+  },
+  "_npmUser": {
+    "name": "datatables",
+    "email": "allan@datatables.net"
+  },
+  "_npmVersion": "1.3.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "datatables.net",
+    "scope": null,
+    "escapedName": "datatables.net",
+    "name": "datatables.net",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/datatables.net/-/datatables.net-2.1.1.tgz",
+  "_shasum": "6f1103ef08054642aecf85e7e25efd592822ee78",
+  "_shrinkwrap": null,
+  "_spec": "datatables.net",
+  "_where": "/opt/lampp/htdocs/keepWhite",
+  "author": {
+    "name": "SpryMedia Ltd",
+    "url": "http://datatables.net"
+  },
+  "bugs": {
+    "url": "https://datatables.net/forums"
+  },
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "description": "DataTables for jQuery ",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "6f1103ef08054642aecf85e7e25efd592822ee78",
+    "tarball": "https://registry.npmjs.org/datatables.net/-/datatables.net-2.1.1.tgz"
+  },
+  "files": [
+    "js/jquery.dataTables.js"
+  ],
+  "homepage": "https://datatables.net",
+  "keywords": [
+    "filter",
+    "sort",
+    "DataTables",
+    "jQuery",
+    "table",
+    "DataTables"
+  ],
+  "license": "MIT",
+  "main": "./js/jquery.dataTables.js",
+  "maintainers": [
+    {
+      "name": "datatables",
+      "email": "npm@datatables.net"
+    }
+  ],
+  "name": "datatables.net",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataTables/Dist-DataTables.git"
+  },
+  "version": "2.1.1"
+}
