@@ -38,7 +38,7 @@ class AuthApiMpmeController extends BaseController
         try{
 
             if(!$token=JWTAuth::attempt($credentials)){
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                return response()->json(['message' => 'invalid_credentials'], 401);
             }
 
             $user = Db::table('users')->where('email', $credentials['email'])->first();
@@ -47,7 +47,7 @@ class AuthApiMpmeController extends BaseController
 
         }
         catch (JWTException $e){
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['message' => 'could_not_create_token'], 500);
         }
 
         return response(compact('token','userProfile'),200)->withHeaders([
@@ -81,7 +81,7 @@ class AuthApiMpmeController extends BaseController
      */
     protected function sendResetLinkResponse($response)
     {
-        return response(['status', trans($response)],200)->withHeaders([
+        return response(['message', trans($response)],200)->withHeaders([
             'Content-Type' => 'application/json',
         ]);
 
@@ -96,7 +96,7 @@ class AuthApiMpmeController extends BaseController
     protected function sendResetLinkFailedResponse($response)
     {
 
-        return response(['email' => trans($response)],422)->withHeaders([
+        return response(['message' => trans($response)],422)->withHeaders([
             'Content-Type' => 'application/json',
         ]);
 
