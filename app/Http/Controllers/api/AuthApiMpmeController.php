@@ -40,13 +40,16 @@ class AuthApiMpmeController extends BaseController
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
 
+            $user = JWTAuth::parseToken($token)->authenticate();
+            $userId = $user->id;
+
 
         }
         catch (JWTException $e){
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response(compact('token'),200)->withHeaders([
+        return response(compact('token','userId'),200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-State' => 'Authenticated Successfully',
         ]);
