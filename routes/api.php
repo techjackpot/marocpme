@@ -43,7 +43,7 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api)  {
     $api->get('/', 'App\Http\Controllers\api\mpmeApiController@getProspects');
     $api->get('/{id}','App\Http\Controllers\api\mpmeApiController@getProspect');
     $api->put('/edit/{id}',['uses'=>'App\Http\Controllers\HomeController@editProspectDetails','as'=>'ProspectEdit']);
-    $api->delete('/destroy/{id}',['uses'=>'App\Http\Controllers\HomeController@editProspectDetails','as'=>'ProspectEdit']);
+    $api->delete('/destroy/{id}',['uses'=>'App\Http\Controllers\HomeController@destroyProspectDetails','as'=>'ProspectDestroy']);
 
     $api->post('/AddNewProspect', 'App\Http\Controllers\HomeController@saveProspect')->name('checkObjM');
 });

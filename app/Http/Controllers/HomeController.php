@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-class HomeController extends Controller
+class HomeController extends BaseController
 {
 
     /**
@@ -351,16 +351,32 @@ $calendar=new calendar;
         else
             return abort(403, 'Unauthorized action.');
     }
-public function editProspectDetails($id){
+    public function editProspectDetails($id){
 
-    $prospect=prospects::find($id);
+        $prospect=prospects::find($id);
 
-    if($prospect&&$prospect->user_id==Auth::user()->id||Auth::user()->isAdmin=='heIs')
-        return view('prospects.details',['prospect'=>$prospect]);
-    else
-        return abort(403, 'Unauthorized action.');
+        if($prospect&&$prospect->user_id==Auth::user()->id||Auth::user()->isAdmin=='heIs')
+            return view('prospects.details',['prospect'=>$prospect]);
+        else
+            return abort(403, 'Unauthorized action.');
 
-}
+    }
+    public function destroyProspectDetails($id){
+
+        $prospect=prospects::find($id);
+
+        if($prospect&&$prospect->user_id==Auth::user()->id||Auth::user()->isAdmin=='heIs') {
+            //if($prospect->delete()) {
+                return response(['status' => "deleted", 'id' => $prospect->id],200)->withHeaders([
+                    'Content-Type' => 'application/json',
+                ]);
+            //}
+            //return view('prospects.details',['prospect'=>$prospect]);
+        }
+        else
+            return abort(403, 'Unauthorized action.');
+
+    }
 
 public function editUserDetails($id)
 {
