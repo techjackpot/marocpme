@@ -41,14 +41,16 @@ class AuthApiMpmeController extends BaseController
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
 
-            $user = Db::table('users')->where('email', $credentials['email'])->first()->toArray();
+            $user = Db::table('users')->where('email', $credentials['email'])->first();
+
+            $userProfile = ['id' => $user->id, 'nom' => $user->nom, 'prenom' => $user->prenom, 'email' => $user->email, 'tel' => $user->tel, 'poste' => $user->poste, 'localisation' => $user->localisation];
 
         }
         catch (JWTException $e){
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response(compact('token','user'),200)->withHeaders([
+        return response(compact('token','userProfile'),200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-State' => 'Authenticated Successfully',
         ]);
