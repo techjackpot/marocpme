@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Session;
 use Yajra\Datatables\Facades\Datatables;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-class HomeController extends BaseController
+class HomeController extends Controller
 {
 
     /**
