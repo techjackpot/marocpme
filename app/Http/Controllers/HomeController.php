@@ -366,11 +366,11 @@ $calendar=new calendar;
         $prospect=prospects::find($id);
 
         if($prospect&&$prospect->user_id==Auth::user()->id||Auth::user()->isAdmin=='heIs') {
-            //if($prospect->delete()) {
+            if($prospect->delete()) {
                 return response(['status' => "deleted", 'id' => $prospect->id],200)->withHeaders([
                     'Content-Type' => 'application/json',
                 ]);
-            //}
+            }
             //return view('prospects.details',['prospect'=>$prospect]);
         }
         else
