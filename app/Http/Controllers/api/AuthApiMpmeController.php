@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Password;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class AuthApiMpmeController extends BaseController
 {
@@ -40,16 +41,14 @@ class AuthApiMpmeController extends BaseController
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
 
-            $user = JWTAuth::parseToken($token)->authenticate();
-            $userId = $user->id;
-
+            $user = Db::table('users')->where('email', $credentials['email'])->first()->toArray();
 
         }
         catch (JWTException $e){
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response(compact('token','userId'),200)->withHeaders([
+        return response(compact('token','user'),200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-State' => 'Authenticated Successfully',
         ]);
