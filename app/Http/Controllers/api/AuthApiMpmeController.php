@@ -81,7 +81,7 @@ class AuthApiMpmeController extends BaseController
      */
     protected function sendResetLinkResponse($response)
     {
-        return response(['message', trans($response)],200)->withHeaders([
+        return response(['message' => trans($response)],200)->withHeaders([
             'Content-Type' => 'application/json',
         ]);
 
