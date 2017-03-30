@@ -494,7 +494,7 @@ $pros->user_id=Auth::user()->id;
             'nomP' => 'required',
             'prenomP' => 'required',
             'mailP'  => 'required',
-            'RSP'=> 'required|unique:prospects,RS',
+            'RSP'=> 'required',
             'telP'=>'digits:10',
             'sexP' => 'required|in:M,F',
             'dateCP'=>'date_format:"Y-m-d"',
@@ -507,7 +507,11 @@ $pros->user_id=Auth::user()->id;
             $this->validate($request, array(
                 'mailP'  => 'email|unique:prospects,mail',
             ));
-
+        }
+        if($request->RSP!=$prospect->RS){
+            $this->validate($request, array(
+                'RSP'  => 'required|unique:prospects,RS',
+            ));
         }
 
 
