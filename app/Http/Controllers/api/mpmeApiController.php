@@ -186,10 +186,9 @@ class mpmeApiController extends BaseController
     {
         $prospects=prospects::all();
 
-        $prospects = DB::table('users')
-            ->join('contacts', 'users.id', '=', 'contacts.user_id')
-            ->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('users.*', 'contacts.phone', 'orders.price')
+        $prospects = DB::table('prospects')
+            ->join('appointments', 'prospects.id', '=', 'appointments.prospect_id')
+            ->select('prospects.*', 'appointments.hour', 'appointments.date', 'appointments.emplacement', 'appointments.note')
             ->get();
 
         return response($prospects,200)->withHeaders([
