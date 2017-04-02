@@ -189,7 +189,7 @@ class mpmeApiController extends BaseController
 
         foreach($prospects as $prospect) {
             $appointment = DB::table('appointments')
-                ->where('prospect_id', '=', $id)
+                ->where('prospect_id', '=', $prospect->id)
                 ->orderBy('id','desc')
                 ->first();
 
