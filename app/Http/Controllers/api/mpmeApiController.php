@@ -208,7 +208,7 @@ class mpmeApiController extends BaseController
             $new_prospects[] = $prospect;
         }
 
-        return response($new_prospects,200)->withHeaders([
+        return response(array('prospects'=>$new_prospects),200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-Type' => 'Get all prospects',
         ]);
