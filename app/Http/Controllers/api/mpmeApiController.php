@@ -184,7 +184,7 @@ class mpmeApiController extends BaseController
 
     public function getProspects()
     {
-        $prospects=prospects::all();
+        //$prospects=prospects::all();
 
         $prospects = DB::table('prospects')
             ->join('appointments', 'prospects.id', '=', 'appointments.prospect_id')
