@@ -185,6 +185,13 @@ class mpmeApiController extends BaseController
     public function getProspects()
     {
         $prospects=prospects::all();
+
+        $prospects = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
+
         return response($prospects,200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-Type' => 'Get all prospects',
@@ -194,12 +201,14 @@ class mpmeApiController extends BaseController
 
     public function getProspect($id)
     {
-        $prospect=prospects::find($id);
+        $prospect=prospects::with('appointments')->where('id','=',$id)->first();//find($id);
 
-        $prospect->appointment = DB::table('appointments')
-            ->where('prospect_id', '=', $id)
+        //$appointment = DB::table('appointments')
+        /*    ->where('prospect_id', '=', $id)
             ->orderBy('id','desc')
-            ->first();
+            ->first();*/
+
+        //$prospect->date = 
 
 
         if($prospect) {
