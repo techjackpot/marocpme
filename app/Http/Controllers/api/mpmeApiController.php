@@ -196,9 +196,9 @@ class mpmeApiController extends BaseController
     {
         $prospect=prospects::find($id);
 
-        $prospect->appointments = DB::table('appointments')
+        $prospect->appointment = DB::table('appointments')
             ->where('prospect_id', '=', $id)
-            ->get();
+            ->first();
 
 
         if($prospect) {
