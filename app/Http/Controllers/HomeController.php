@@ -451,7 +451,7 @@ $pros->user_id=Auth::user()->id;
         $pros->secteur = ($request->ProsSecteur)!=''?$request->ProsSecteur:null;
         $pros->fax = ($request->ProsFax)!=''?$request->ProsFax:null;
         $pros->ville = ($request->ProsVille)!=''?$request->ProsVille:null;
-        $pros->chiffreAff = ($request->ztT)!=''?$request->ztT:null;
+        $pros->chiffreAff = ($request->ztT)!=null?1:0;
 
 
         $pros->imtiaz = ($request->imtiaz)!=null?1:0;
@@ -528,7 +528,7 @@ $pros->user_id=Auth::user()->id;
         $prospect->secteur = ($request->secteurP)!=''?$request->secteurP:null;
         $prospect->fax = ($request->faxP)!=''?$request->faxP:null;
         $prospect->ville = ($request->villeP)!=''?$request->villeP:null;
-        $pros->chiffreAff = ($request->ztT)!=''?$request->ztT:null;
+        $prospect->chiffreAff = ($request->ztT)!=null?1:0;
 
 
         $prospect->imtiaz = ($request->imtiaz)!=null?1:0;
