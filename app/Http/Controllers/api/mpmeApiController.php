@@ -187,11 +187,8 @@ class mpmeApiController extends BaseController
         //$prospects=prospects::all();
 
         $prospects = DB::table('prospects')
-            ->join('appointments', function($join) {
-                $join->on('prospects.id', '=', 'appointments.prospect_id')
-                    ->where('appointments.id', '=', DB::raw("(select max(appointments.id) from appointments)"));
-            })
-            ->select('prospects.*', 'appointments.hour', 'appointments.date', 'appointments.emplacement', 'appointments.note')
+            ->join(DB::raw('(select * from appointments where prospect_id=prospects.id order by id desc limit 0,1) as appointment', 'prospects.id', '=', 'appointment.prospect_id')
+            ->select('prospects.*', 'appointment.hour', 'appointment.date', 'appointment.emplacement', 'appointment.note')
             ///->orderBy('appointments.id')
             //->groupBy('prospects.id')
             ->get();
