@@ -12,6 +12,7 @@ use App\prospects;
 use App\User;
 use Illuminate\Http\Request;
 use Dingo\Api\Exception\ValidationHttpException;
+use Illuminate\Support\Facades\DB;
 
 class mpmeApiController extends BaseController
 {
