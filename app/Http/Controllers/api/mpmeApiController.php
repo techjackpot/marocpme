@@ -198,6 +198,7 @@ class mpmeApiController extends BaseController
 
         $prospect->appointment = DB::table('appointments')
             ->where('prospect_id', '=', $id)
+            ->orderBy('id','desc')
             ->first();
 
 
