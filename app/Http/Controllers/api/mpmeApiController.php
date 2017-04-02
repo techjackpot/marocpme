@@ -184,16 +184,23 @@ class mpmeApiController extends BaseController
 
     public function getProspects()
     {
-        //$prospects=prospects::all();
+        $prospects=prospects::all();
+        $new_prospects = array();
 
-        $prospects = DB::table('prospects')
-            ->join(DB::raw('(select * from appointments where prospect_id=prospects.id order by id desc limit 1) as appointment'), 'prospects.id', '=', 'appointment.prospect_id')
-            ->select('prospects.*', 'appointment.hour', 'appointment.date', 'appointment.emplacement', 'appointment.note')
-            ///->orderBy('appointments.id')
-            //->groupBy('prospects.id')
-            ->get();
+        foreach($prospects as $prospect) {
+            $appointment = DB::table('appointments')
+                ->where('prospect_id', '=', $id)
+                ->orderBy('id','desc')
+                ->first();
 
-        return response($prospects,200)->withHeaders([
+            $prospect->date = $appointment->date;
+            $prospect->hour = $appointment->hour;
+            $prospect->emplacement = $appointment->emplacement;
+            $prospect->note = $appointment->note;
+            $new_prospects[] = $prospect;
+        }
+
+        return response($new_prospects,200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-Type' => 'Get all prospects',
         ]);
