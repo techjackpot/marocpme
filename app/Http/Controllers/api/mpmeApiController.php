@@ -195,6 +195,10 @@ class mpmeApiController extends BaseController
     {
         $prospect=prospects::find($id);
 
+        $prospect->appointments = DB::table('appointments')
+            ->where('prospect_id', '=', $id)
+            ->get();
+
 
         if($prospect) {
             return response($prospect, 200)->withHeaders([
