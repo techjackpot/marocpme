@@ -187,10 +187,10 @@ class mpmeApiController extends BaseController
         //$prospects=prospects::all();
 
         $prospects = DB::table('prospects')
-            ->join('appointments', 'prospects.id', '=', 'appointments.prospect_id')
+            ->leftjoin('appointments', 'prospects.id', '=', 'appointments.prospect_id')
             ->select('prospects.*', 'appointments.hour', 'appointments.date', 'appointments.emplacement', 'appointments.note')
             ///->orderBy('appointments.id')
-            ->groupBy('prospects.id')
+            //->groupBy('prospects.id')
             ->get();
 
         return response($prospects,200)->withHeaders([
