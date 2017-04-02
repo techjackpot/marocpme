@@ -201,14 +201,17 @@ class mpmeApiController extends BaseController
 
     public function getProspect($id)
     {
-        $prospect=prospects::with('appointments')->where('id','=',$id)->first();//find($id);
+        $prospect=prospects::find($id);
 
-        //$appointment = DB::table('appointments')
-        /*    ->where('prospect_id', '=', $id)
+        $appointment = DB::table('appointments')
+            ->where('prospect_id', '=', $id)
             ->orderBy('id','desc')
-            ->first();*/
+            ->first();
 
-        //$prospect->date = 
+        $prospect->date = $appointment->date;
+        $prospect->hour = $appointment->hour;
+        $prospect->emplacement = $appointment->emplacement;
+        $prospect->note = $appointment->note;
 
 
         if($prospect) {
