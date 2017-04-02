@@ -172,7 +172,15 @@ class mpmeApiController extends BaseController
     public function AllCalendars()
     {
         $calendars=calendar::all();
-        return response($calendars,200)->withHeaders([
+        $new_calendars = array();
+        foreach($calendars as $calendar) {
+            $user = DB::table('users')
+                ->where('id', '=', $calendar->user_id)
+                ->first();
+            $calendar->name = $user->nom . ' ' . $user->prenom;
+            $new_calendars[] = $calendar;
+        }
+        return response($new_calendars,200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-Type' => 'Get all calendars',
             'Action-Location'=>'Marrakech',
