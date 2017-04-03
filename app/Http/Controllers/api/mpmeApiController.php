@@ -180,11 +180,103 @@ class mpmeApiController extends BaseController
             $calendar->name = $user->nom . ' ' . $user->prenom;
             $new_calendars[] = $calendar;
         }
-        return response($new_calendars,200)->withHeaders([
+        return response(array('calendars'=>$new_calendars),200)->withHeaders([
             'Content-Type' => 'application/json',
             'Action-Type' => 'Get all calendars',
             'Action-Location'=>'Marrakech',
         ]);
+    }
+
+    public function getAppointments() {
+        $appointments = appointment::all();
+        $new_appointments = array();
+        foreach($appointments as $appointment) {
+            $calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
+            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
+            $appointment->name = $prospect->nom . ' ' . $prospect->prenom;
+            $new_appointments[] = $appointment;
+        }
+        return response(array('appointments'=>$new_appointments),200)->withHeaders([
+            'Content-Type' => 'application/json',
+            'Action-Type' => 'Get all appointments'
+        ]);
+    }
+    public function getAppointment($id) {
+        $appointment = appointment::find($id);
+        if($appointment) {
+            $calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
+            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
+            $appointment->user_id = $calendar->user_id;
+            $user = User::find($calendar->user_id);
+            $appointment->name = $user->nom . ' ' . $user->prenom; //$prospect->nom . ' ' . $prospect->prenom;
+            return response($appointment, 200)->withHeaders([
+                'Content-Type' => 'application/json',
+                'Action-Type' => 'Get appointment ' . $appointment->id,
+            ]);
+        }
+        else{
+            return response(['error'=>'appointment non trouvé'], 400)->withHeaders([
+                'Content-Type' => 'application/json',
+                'Action-Type' => 'appointment not found ' . $id,
+
+            ]);
+
+        }
+    }
+    public function editAppointment(Request $request, $id) {
+        $appointment=appointment::find($id);
+
+        if($appointment) {
+
+            $this->validate($request, array(
+                'prospect_name' => 'required',
+                'emplacement' => 'required',
+                'note' => 'required',
+            ));
+
+            $appointment->emplacement = $request->emplacement;
+            $appointment->note = $request->note;
+            $appointment->save();
+
+            $prospect = prospects::find($appointment->prospect_id);
+            $prospect->nom = $request->prospect_name;
+            $prospect->prenom = '';
+            $prospect->save();
+
+            return response($appointment, 201)
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Action-Type' => 'Update appointment'
+                ]);
+        }
+        else{
+            return response(['error'=>'appointment non trouvé'], 400)->withHeaders([
+                'Content-Type' => 'application/json',
+                'Action-Type' => 'Appointment not found ' . $id,
+
+            ]);
+        }
+    }
+    public function destroyAppointment($id) {
+        $appointment = appointment::findOrFail($id);
+        if($appointment && $appointment->delete()) {
+            return response(['status' => "deleted", 'id' => $appointment->id],200)->withHeaders([
+                'Content-Type' => 'application/json',
+            ]);
+        }
+    }
+    public function addAppointment(Request $request, $pros_id) {
+        $appointment = new appointment();
+        $idCalendar = calendar::where('user_id', '=',Auth::user()->id)->first();
+        $appointment->calendar_id = $idCalendar->id;
+        $appointment->prospect_id = $pros_id;
+        $appointment->date = $request->dateM;
+        $appointment->hour = $request->hourM;
+        $appointment->emplacement = $request->empM;
+        $appointment->note = $request->noteM;
+        $appointment->save();
+
+        return response()->json($appointment);
     }
 
 
@@ -219,18 +311,17 @@ class mpmeApiController extends BaseController
     {
         $prospect=prospects::find($id);
 
-        $appointment = DB::table('appointments')
-            ->where('prospect_id', '=', $id)
-            ->orderBy('id','desc')
-            ->first();
-
-        $prospect->date = $appointment->date;
-        $prospect->hour = $appointment->hour;
-        $prospect->emplacement = $appointment->emplacement;
-        $prospect->note = $appointment->note;
-
-
         if($prospect) {
+            $appointment = DB::table('appointments')
+                ->where('prospect_id', '=', $id)
+                ->orderBy('id','desc')
+                ->first();
+
+            $prospect->date = $appointment->date;
+            $prospect->hour = $appointment->hour;
+            $prospect->emplacement = $appointment->emplacement;
+            $prospect->note = $appointment->note;
+
             return response($prospect, 200)->withHeaders([
                 'Content-Type' => 'application/json',
                 'Action-Type' => 'Get prospect ' . $prospect->id,

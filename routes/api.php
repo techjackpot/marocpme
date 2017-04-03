@@ -38,6 +38,16 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api)  {
 
     });
 
+    $api->version('v1', ['prefix' => 'appointments'], function ($api) {
+        $api->get('/', ['as' => 'appointments', 'uses' => 'App\Http\Controllers\api\mpmeApiController@getAppointments']);
+        $api->get('/{id}', ['as' => 'appointments', 'uses' => 'App\Http\Controllers\api\mpmeApiController@getAppointment']);
+        $api->put('/edit/{id}', ['as' => 'appointments', 'uses' => 'App\Http\Controllers\api\mpmeApiController@editAppointment']);
+        $api->delete('/destroy/{id}', ['as' => 'appointments', 'uses' => 'App\Http\Controllers\api\mpmeApiController@deleteAppointment']);
+        $api->post('/addAppointment/{pros_id}', ['as' => 'appointments', 'uses' => 'App\Http\Controllers\api\mpmeApiController@addAppointment']);
+
+
+    });
+
 
     $api->version('v1', ['prefix' => 'prospects'], function ($api) {
     $api->get('/', 'App\Http\Controllers\api\mpmeApiController@getProspects');
