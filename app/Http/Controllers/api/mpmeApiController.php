@@ -12,6 +12,7 @@ use App\prospects;
 use App\appointment;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Dingo\Api\Exception\ValidationHttpException;
 use Illuminate\Support\Facades\DB;
 
