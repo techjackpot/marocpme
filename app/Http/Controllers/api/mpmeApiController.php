@@ -235,10 +235,14 @@ class mpmeApiController extends BaseController
                 'prospect_name' => 'required',
                 'emplacement' => 'required',
                 'note' => 'required',
+                'date' => 'required',
+                'hour' => 'required',
             ));
 
             $appointment->emplacement = $request->emplacement;
             $appointment->note = $request->note;
+            $appointment->date = $request->date;
+            $appointment->hour = $request->hour;
             $appointment->save();
 
             $prospect = prospects::find($appointment->prospect_id);
