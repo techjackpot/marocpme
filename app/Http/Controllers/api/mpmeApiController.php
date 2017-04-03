@@ -9,6 +9,7 @@ namespace App\Http\Controllers\api;
 
 use App\calendar;
 use App\prospects;
+use App\appointment;
 use App\User;
 use Illuminate\Http\Request;
 use Dingo\Api\Exception\ValidationHttpException;
