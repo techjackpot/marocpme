@@ -298,10 +298,12 @@ class mpmeApiController extends BaseController
                 ->orderBy('id','desc')
                 ->first();
 
-            $prospect->date = $appointment->date;
-            $prospect->hour = $appointment->hour;
-            $prospect->emplacement = $appointment->emplacement;
-            $prospect->note = $appointment->note;
+            if($appointment) {
+                $prospect->date = $appointment->date;
+                $prospect->hour = $appointment->hour;
+                $prospect->emplacement = $appointment->emplacement;
+                $prospect->note = $appointment->note;
+            }
             $new_prospects[] = $prospect;
         }
 
