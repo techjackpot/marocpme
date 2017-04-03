@@ -192,9 +192,10 @@ class mpmeApiController extends BaseController
         $appointments = appointment::all();
         $new_appointments = array();
         foreach($appointments as $appointment) {
-            $calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
-            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
-            $appointment->name = $prospect->nom . ' ' . $prospect->prenom;
+
+            //$calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
+            //$prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
+            //$appointment->name = $prospect->nom . ' ' . $prospect->prenom;
             $new_appointments[] = $appointment;
         }
         return response(array('appointments'=>$new_appointments),200)->withHeaders([
