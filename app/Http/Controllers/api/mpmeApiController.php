@@ -192,10 +192,9 @@ class mpmeApiController extends BaseController
         $appointments = appointment::all();
         $new_appointments = array();
         foreach($appointments as $appointment) {
-
             //$calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
-            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
-            //$appointment->name = $prospect->nom . ' ' . $prospect->prenom;
+            $prospect = DB::table('prospects')->where('id','=',$appointment->prospect_id)->first();
+            $appointment->name = $prospect->nom . ' ' . $prospect->prenom;
             $new_appointments[] = $appointment;
         }
         return response(array('appointments'=>$new_appointments),200)->withHeaders([
@@ -207,10 +206,10 @@ class mpmeApiController extends BaseController
         $appointment = appointment::find($id);
         if($appointment) {
             $calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
-            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
+            $prospect = DB::table('prospects')->where('id','=',$appointment->prospect_id)->first();
             $appointment->user_id = $calendar->user_id;
-            $user = User::find($calendar->user_id);
-            $appointment->name = $user->nom . ' ' . $user->prenom; //$prospect->nom . ' ' . $prospect->prenom;
+            //$user = User::find($calendar->user_id);
+            $appointment->name = $prospect->nom . ' ' . $prospect->prenom; //$user->nom . ' ' . $user->prenom; 
             return response($appointment, 200)->withHeaders([
                 'Content-Type' => 'application/json',
                 'Action-Type' => 'Get appointment ' . $appointment->id,
