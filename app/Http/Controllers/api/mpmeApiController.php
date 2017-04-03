@@ -194,7 +194,7 @@ class mpmeApiController extends BaseController
         foreach($appointments as $appointment) {
 
             //$calendar = DB::table('calendars')->where('id','=',$appointment->calendar_id)->first();
-            //$prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
+            $prospect = DB::table('prospects')->where('user_id','=',$appointment->prospect_id)->first();
             //$appointment->name = $prospect->nom . ' ' . $prospect->prenom;
             $new_appointments[] = $appointment;
         }
