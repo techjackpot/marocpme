@@ -242,8 +242,10 @@ class mpmeApiController extends BaseController
             $appointment->save();
 
             $prospect = prospects::find($appointment->prospect_id);
-            $prospect->nom = $request->prospect_name;
-            $prospect->prenom = '';
+            $results = array();
+            preg_match('#^(\w+\.)?\s*([\'\’\w]+)\s+([\'\’\w]+)\s*(\w+\.?)?$#', $request->prospect_name, $results);
+            $prospect->nom = $results[2];
+            $prospect->prenom = $results[3];
             $prospect->save();
 
             return response($appointment, 201)
