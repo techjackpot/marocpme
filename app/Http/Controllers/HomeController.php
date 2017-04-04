@@ -456,13 +456,13 @@ $pros->user_id=Auth::user()->id;
         $pros->upi = ($request->upi==1)?1:0;
 
 
-        $pros->imtiaz = ($request->imtiaz)!=null?1:0;
-        $pros->moussanada = ($request->moussanada)!=null?1:0;
-        $pros->tahfiz = ($request->tahfiz)!=null?1:0;
-        $pros->istitmar = ($request->istitmar)!=null?1:0;
-        $pros->systemeInfo = ($request->systInfo)!=null?1:0;
-        $pros->startUp = ($request->startUp)!=null?1:0;
-        $pros->consultance = ($request->consultance)!=null?1:0;
+        $pros->imtiaz = ($request->imtiaz==1)?1:0;
+        $pros->moussanada = ($request->moussanada==1)?1:0;
+        $pros->tahfiz = ($request->tahfiz==1)?1:0;
+        $pros->istitmar = ($request->istitmar==1)?1:0;
+        $pros->systemeInfo = ($request->systInfo==1)?1:0;
+        $pros->startUp = ($request->startUp==1)?1:0;
+        $pros->consultance = ($request->consultance==1)?1:0;
         $pros->autoEntr =($request->autoEntr)!=null?$request->o1:null;
 
        $pros->save();
@@ -535,13 +535,13 @@ $pros->user_id=Auth::user()->id;
         $prospect->upi = ($request->upi==1)?1:0;
 
 
-        $prospect->imtiaz = ($request->imtiaz)!=null?1:0;
-        $prospect->moussanada = ($request->moussanada)!=null?1:0;
-        $prospect->tahfiz = ($request->tahfiz)!=null?1:0;
-        $prospect->istitmar = ($request->istitmar)!=null?1:0;
-        $prospect->systemeInfo = ($request->systInfo)!=null?1:0;
-        $prospect->startUp = ($request->startUp)!=null?1:0;
-        $prospect->consultance = ($request->consultance)!=null?1:0;
+        $prospect->imtiaz = ($request->imtiaz==1)?1:0;
+        $prospect->moussanada = ($request->moussanada==1)?1:0;
+        $prospect->tahfiz = ($request->tahfiz==1)?1:0;
+        $prospect->istitmar = ($request->istitmar==1)?1:0;
+        $prospect->systemeInfo = ($request->systInfo==1)?1:0;
+        $prospect->startUp = ($request->startUp==1)?1:0;
+        $prospect->consultance = ($request->consultance==1)?1:0;
         $prospect->autoEntr =($request->autoEntr)!=null?$request->o1:null;
 
         $prospect->save();
