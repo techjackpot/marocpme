@@ -451,9 +451,9 @@ $pros->user_id=Auth::user()->id;
         $pros->secteur = ($request->ProsSecteur)!=''?$request->ProsSecteur:null;
         $pros->fax = ($request->ProsFax)!=''?$request->ProsFax:null;
         $pros->ville = ($request->ProsVille)!=''?$request->ProsVille:null;
-        $pros->chiffreAff = ($request->ztT)?1:0;
-        $pros->porteur = ($request->porteur)?1:0;
-        $pros->upi = ($request->upi)?1:0;
+        $pros->chiffreAff = ($request->ztT)!=null?1:0;
+        $pros->porteur = ($request->porteur)!=null?1:0;
+        $pros->upi = ($request->upi)!=null?1:0;
 
 
         $pros->imtiaz = ($request->imtiaz)!=null?1:0;
@@ -530,9 +530,9 @@ $pros->user_id=Auth::user()->id;
         $prospect->secteur = ($request->secteurP)!=''?$request->secteurP:null;
         $prospect->fax = ($request->faxP)!=''?$request->faxP:null;
         $prospect->ville = ($request->villeP)!=''?$request->villeP:null;
-        $prospect->chiffreAff = ($request->ztT)?1:0;
-        $prospect->porteur = ($request->porteur)?1:0;
-        $prospect->upi = ($request->upi)?1:0;
+        $prospect->chiffreAff = ($request->ztT)!=null?1:0;
+        $prospect->porteur = ($request->porteur)!=null?1:0;
+        $prospect->upi = ($request->upi)!=null?1:0;
 
 
         $prospect->imtiaz = ($request->imtiaz)!=null?1:0;
