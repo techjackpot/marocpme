@@ -237,9 +237,9 @@ $calendar=new calendar;
                 $actions=' <a class="viewVisit" href="detail/'.$user->id.'"> <img src="'.asset("img/001-eye-copie.png").'" onmouseover="hover(this,\''.asset("img/001-eye.png").'\');" onmouseout="unhover(this,\''.asset("img/001-eye-copie.png").'\');"></a>';
                 $actions.='<a class="editVisit" href="' .route("UserEdit",["id"=>$user->id]) . '"> <img src="'.asset("img/002-edit-copie.png").'" onmouseover="hover(this,\''.asset("img/002-edit.png").'\');" onmouseout="unhover(this,\''.asset("img/002-edit-copie.png").'\');"></a>';
               if($user->active=="forNow")
-                $actions.= '<a class="deleteVisit" data-toggle="modal" data-target="#deleteProsp" href="#" data-delete="'.route('deleteThisUser',$user->id).'"> <img src="'.asset("img/003-delete-copie.png").'" onmouseover="hover(this,\''.asset("img/003-delete.png").'\');" onmouseout="unhover(this,\''.asset("img/003-delete-copie.png").'\');"></a>';
+                $actions.= '<a class="deleteVisit" href="#" data-delete="'.route('deleteThisUser',$user->id).'"> <img src="'.asset("img/003-delete-copie.png").'" onmouseover="hover(this,\''.asset("img/003-delete.png").'\');" onmouseout="unhover(this,\''.asset("img/003-delete-copie.png").'\');"></a>';
                 else if($user->active=="notAnymore")
-                    $actions.= '<a class="deleteVisit blocked" data-toggle="modal" data-target="#deleteProsp" href="#" data-delete="'.route('deleteThisUser',$user->id).'"> <img src="'.asset("img/003-delete.png").'" onmouseover="hover(this,\''.asset("img/003-delete-copie.png").'\');" onmouseout="unhover(this,\''.asset("img/003-delete.png").'\');"></a>';
+                    $actions.= '<a class="deleteVisit blocked" href="#" data-delete="'.route('deleteThisUser',$user->id).'"> <img src="'.asset("img/003-delete.png").'" onmouseover="hover(this,\''.asset("img/003-delete-copie.png").'\');" onmouseout="unhover(this,\''.asset("img/003-delete.png").'\');"></a>';
 
 
                 return $actions;
